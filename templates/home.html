@@ -1,0 +1,34 @@
+{% extends 'base.html' %}
+{% block content %}
+    <div class="hero">
+        <span class="eyebrow">Now in beta</span>
+        {% if user.is_authenticated %}
+            <h1>Welcome back, {{ user.username }}.</h1>
+            <p>Here's what the community has been sharing.</p>
+            <div class="hero-ctas">
+                <a href="{% url 'create_post' %}" class="btn-primary">+ New Post</a>
+                <a href="{% url 'profile' %}" class="btn-secondary">View Profile</a>
+            </div>
+        {% else %}
+            <h1>Share ideas that matter.</h1>
+            <p>A clean, focused space to post your thoughts and follow what others are building.</p>
+            <div class="hero-ctas">
+                <a href="{% url 'signup' %}" class="btn-primary">Get Started — Free</a>
+                <a href="{% url 'login' %}" class="btn-secondary">Log In</a>
+            </div>
+        {% endif %}
+    </div>
+
+    <div class="section wrap">
+        <div class="section-label">Recent Posts</div>
+        {% for post in posts %}
+            <div class="post">
+                <h3>{{ post.title }}</h3>
+                <p>{{ post.content }}</p>
+                <small>{{ post.author.username }} · {{ post.created_at|date:"M d, Y" }}</small>
+            </div>
+        {% empty %}
+            <p style="color:#666677;">No posts yet — be the first.</p>
+        {% endfor %}
+    </div>
+{% endblock %}

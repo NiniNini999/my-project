@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+{% block content %}
+    <div class="card">
+        <h1>{{ user.username }}</h1>
+        <p>Account details</p>
+        <div style="margin-top:20px; display:flex; flex-direction:column; gap:14px;">
+            <div>
+                <label>Email</label>
+                <div style="color:#e8e8ed;">{{ user.email|default:"Not set" }}</div>
+            </div>
+            <div>
+                <label>Member Since</label>
+                <div style="color:#e8e8ed;">{{ user.date_joined|date:"F d, Y" }}</div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
